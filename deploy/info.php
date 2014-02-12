@@ -34,14 +34,33 @@ $app['controllers']['advanced']['title'] = lang('base_app_advanced_settings');
 // Packaging
 /////////////////////////////////////////////////////////////////////////////
 
+$app['requires'] = array(
+    'app-webapp',
+    'app-mysql'
+);
+
 $app['core_requires'] = array(
-    'app-web-server-core >= 1:1.4.40',
+    'app-webapp-core',
     'webapp-joomla',
 );
 
-/*
-$app['core_file_manifest'] = array(
-    'system_database_default.conf' => array ('target' => '/etc/clearos/storage.d/system_database_default.conf'),
-    'system-mysqld.php' => array('target' => '/var/clearos/base/daemon/system-mysqld.php'),
+$app['core_directory_manifest'] = array(
+    '/var/clearos/joomla' => array(),
+    '/var/clearos/joomla/archive' => array(),
+    '/var/clearos/joomla/backup' => array(),
+    '/var/clearos/joomla/webroot' => array(),
 );
-*/
+
+$app['core_file_manifest'] = array(
+    'webapp-joomla-flexshare.conf' => array(
+        'target' => '/etc/clearos/flexshare.d/webapp-joomla.conf',
+        'config' => TRUE,
+        'config_params' => 'noreplace'
+    ),
+    'webapp-joomla-httpd.conf' => array(
+        'target' => '/etc/httpd/conf.d/webapp-joomla.conf',
+        'config' => TRUE,
+        'config_params' => 'noreplace'
+    )
+);
+

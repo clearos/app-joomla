@@ -52,17 +52,11 @@ clearos_load_language('joomla');
 // D E P E N D E N C I E S
 ///////////////////////////////////////////////////////////////////////////////
 
-// Classes
-//--------
-
+use \clearos\apps\base\File as File;
 use \clearos\apps\webapp\Webapp_Engine as Webapp_Engine;
 
+clearos_load_library('base/File');
 clearos_load_library('webapp/Webapp_Engine');
-
-// Exceptions
-//-----------
-
-use \Exception as Exception;
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
@@ -108,37 +102,108 @@ class Webapp_Driver extends Webapp_Engine
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        // FIXME
-        return array('https://joomla.clear6.lan/administrator', 'http://clear6.lan/joomla/administrator');
+        $this->_load_config();
+
+        $urls = array();
+
+        if ($this->get_hostname_access())
+            $urls[] = 'https://' . $this->get_hostname() . '/administrator';
+
+        if ($this->get_directory_access())
+            $urls[] = 'https://' . $this->_get_ip_for_url() . $this->get_directory() . '/administrator';
+
+        return $urls;
     }
 
     /**
-     * Returns home URLs.
+     * Returns default directory access policy.
      *
-     * @return array list of home URLs
-     * @throws Engine_Exception
+     * @return boolean default directory access policy
      */
 
-    function get_home_urls()
+    function get_directory_access_default()
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        // FIXME
-        return array('http://joomla.clear6.lan', 'http://clear6.lan/joomla');
+        return TRUE;
     }
+
+    /**
+     * Returns default hostname access policy.
+     *
+     * @return boolean default hostname access policy
+     */
+
+    function get_hostname_access_default()
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        return TRUE;
+    }
+
+    /**
+     * Returns webapp nickname.
+     *
+     * @return string webapp nickname
+     */
 
     public function get_nickname()
     {
+        clearos_profile(__METHOD__, __LINE__);
+
         return 'joomla';
     }
 
+    /**
+     * Returns getting started message to guide end user.
+     *
+     * @return string getting started message
+     */
+
     public function get_getting_started_message()
     {
+        clearos_profile(__METHOD__, __LINE__);
+
         return lang('joomla_getting_started_message');
     }
 
+    /**
+     * Returns getting started URL.
+     *
+     * @return string getting started URL
+     */
+
     public function get_getting_started_url()
     {
-        return 'http://192.168.55.6/joomla/administrator/'; // FIXME
+        clearos_profile(__METHOD__, __LINE__);
+
+        if ($this->get_directory_access())
+            return 'https://' . $this->_get_ip_for_url() . $this->get_directory();
+
+        if ($this->get_hostname_access())
+            return 'https://' . $this->get_hostname();
+    }
+
+    /**
+     * Hook called by Webapp engine after unpacking files.
+     *
+     * @return void
+     */
+
+    protected function _post_unpacking_hook()
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        $target_path = $this->path_install . '/' . self::PATH_WEBROOT . '/' . self::PATH_LIVE . '/';
+
+        // Robots.txt
+        $file = new File($target_path . '/robots.txt.dist');
+        if ($file->exists())
+            $file->move_to($target_path . '/robots.txt');
+
+        // .htaccess
+        $file = new File($target_path . '/htaccess.txt');
+        if ($file->exists())
+            $file->move_to($target_path . '/.htaccess');
     }
 }

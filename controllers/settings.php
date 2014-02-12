@@ -43,6 +43,10 @@ require clearos_app_base('webapp') . '/controllers/webapp_settings.php';
 
 class Settings extends Webapp_Settings
 {
+    /**
+     * Settings constructor.
+     */
+    
     function __construct()
     {
         parent::__construct('joomla');

@@ -43,6 +43,10 @@ require clearos_app_base('webapp') . '/controllers/webapp_initialize.php';
 
 class Initialize extends Webapp_Initialize
 {
+    /**
+     * Initialize constructor.
+     */
+    
     function __construct()
     {
         parent::__construct('joomla');

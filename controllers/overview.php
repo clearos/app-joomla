@@ -43,6 +43,10 @@ require clearos_app_base('webapp') . '/controllers/webapp_overview.php';
 
 class Overview extends Webapp_Overview
 {
+    /**
+     * Overview constructor.
+     */
+    
     function __construct()
     {
         parent::__construct('joomla');

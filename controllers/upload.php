@@ -43,6 +43,10 @@ require clearos_app_base('webapp') . '/controllers/webapp_upload.php';
 
 class Upload extends Webapp_Upload
 {
+    /**
+     * Upload constructor.
+     */
+
     function __construct()
     {
         parent::__construct('joomla');
