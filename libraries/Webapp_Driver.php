@@ -116,6 +116,20 @@ class Webapp_Driver extends Webapp_Engine
     }
 
     /**
+     * Returns database admin URL.
+     *
+     * @return string database admin URL
+     * @throws Engine_Exception
+     */
+
+    function get_database_url()
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        return '/app/joomla/database/login';
+    }
+
+    /**
      * Returns default directory access policy.
      *
      * @return boolean default directory access policy
