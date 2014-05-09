@@ -11,7 +11,7 @@ Buildarch: noarch
 Requires: %{name}-core = 1:%{version}-%{release}
 Requires: app-base
 Requires: app-webapp
-Requires: app-mysql
+Requires: app-system-database
 
 %description
 Joomla is an award-winning content management system (CMS), which enables you to build web sites and powerful online applications.
@@ -22,6 +22,7 @@ License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
 Requires: app-webapp-core
+Requires: app-system-database-core
 Requires: webapp-joomla
 
 %description core

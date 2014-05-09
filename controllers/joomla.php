@@ -74,10 +74,10 @@ class Joomla extends ClearOS_Controller
         // Load controllers
         //-----------------
 
-        if ($is_initialized)
-            $views = array('joomla/overview', 'joomla/upload', 'joomla/settings', 'joomla/advanced');
-        else
-            $views = array('joomla/initialize');
+        if (!$is_initialized)
+            redirect('/joomla/initialize');
+
+        $views = array('joomla/overview', 'joomla/upload', 'joomla/settings', 'joomla/advanced');
 
         $this->page->view_controllers($views, lang('joomla_app_name'));
     }

@@ -36,11 +36,12 @@ $app['controllers']['advanced']['title'] = lang('base_app_advanced_settings');
 
 $app['requires'] = array(
     'app-webapp',
-    'app-mysql'
+    'app-system-database >= 1:1.5.30',
 );
 
 $app['core_requires'] = array(
     'app-webapp-core',
+    'app-system-database-core >= 1:1.5.30',
     'webapp-joomla',
 );
 
