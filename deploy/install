@@ -1,3 +1,10 @@
 #!/bin/sh
 
-/usr/sbin/flexshare -n webapp-joomla -a activate
+# Create webroot
+mkdir -p /var/clearos/joomla/webroot
+
+# Active Fleshare
+/usr/sbin/flexshare -n webapp-joomla -a activate >/dev/null 2>&1
+
+# Initialize database
+/usr/sbin/systemdb joomla apache

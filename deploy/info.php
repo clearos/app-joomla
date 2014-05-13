@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'joomla';
-$app['version'] = '1.0.0';
+$app['version'] = '1.6.1';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -36,12 +36,12 @@ $app['controllers']['advanced']['title'] = lang('base_app_advanced_settings');
 
 $app['requires'] = array(
     'app-webapp',
-    'app-system-database >= 1:1.5.30',
+    'app-system-database',
 );
 
 $app['core_requires'] = array(
-    'app-webapp-core',
-    'app-system-database-core >= 1:1.5.30',
+    'app-webapp-core >= 1:1.6.1',
+    'app-system-database-core >= 1:1.6.1',
     'webapp-joomla',
 );
 

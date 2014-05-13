@@ -1,7 +1,7 @@
 
 Name: app-joomla
 Epoch: 1
-Version: 1.0.0
+Version: 1.6.1
 Release: 1%{dist}
 Summary: Joomla
 License: GPLv3
@@ -21,8 +21,8 @@ Summary: Joomla - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
-Requires: app-webapp-core
-Requires: app-system-database-core
+Requires: app-webapp-core >= 1:1.6.1
+Requires: app-system-database-core >= 1:1.6.1
 Requires: webapp-joomla
 
 %description core
@@ -37,7 +37,7 @@ This package provides the core API and libraries.
 %install
 mkdir -p -m 755 %{buildroot}/usr/clearos/apps/joomla
 cp -r * %{buildroot}/usr/clearos/apps/joomla/
-
+rm -f %{buildroot}/usr/clearos/apps/joomla/README.md
 install -d -m 0755 %{buildroot}/var/clearos/joomla
 install -d -m 0755 %{buildroot}/var/clearos/joomla/archive
 install -d -m 0755 %{buildroot}/var/clearos/joomla/backup
@@ -80,6 +80,7 @@ exit 0
 
 %files core
 %defattr(-,root,root)
+%doc README.md
 %exclude /usr/clearos/apps/joomla/packaging
 %dir /usr/clearos/apps/joomla
 %dir /var/clearos/joomla
