@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Joomla controller.
+ * Version controller.
  *
- * @category   apps
- * @package    joomla
- * @subpackage controllers
+ * @category   Apps
+ * @package    Joomla
+ * @subpackage Controller
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2014 ClearFoundation
+ * @copyright  2017 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
- * @link       http://www.clearfoundation.com/docs/developer/apps/joomla/
+ * @link    http://www.clearfoundation.com/docs/developer/apps/joomla/
  */
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -36,13 +36,13 @@
 /**
  * Joomla controller.
  *
- * @category   apps
- * @package    joomla
- * @subpackage controllers
+ * @category   Apps
+ * @package    Joomla
+ * @subpackage Controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2014 ClearFoundation
+ * @copyright  2017 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
- * @link       http://www.clearfoundation.com/docs/developer/apps/joomla/
+ * @link    http://www.clearfoundation.com/docs/developer/apps/joomla/
  */
 
 class Joomla extends ClearOS_Controller
@@ -59,26 +59,12 @@ class Joomla extends ClearOS_Controller
         //---------------
 
         $this->lang->load('joomla');
-        $this->load->library('joomla/Webapp_Driver');
 
-        // Load view data
-        //---------------
+        // Load views
+        //-----------
 
-        try {
-            $is_initialized = $this->webapp_driver->is_initialized();
-        } catch (\Exception $e) {
-            $this->page->view_exception($e);
-            return;
-        }
+        $views = array('joomla/dependencies', 'joomla/site', 'joomla/version');
 
-        // Load controllers
-        //-----------------
-
-        if (!$is_initialized)
-            redirect('/joomla/initialize');
-
-        $views = array('joomla/overview', 'joomla/upload', 'joomla/settings', 'joomla/advanced');
-
-        $this->page->view_controllers($views, lang('joomla_app_name'));
+        $this->page->view_forms($views, lang('joomla_app_name'));
     }
 }

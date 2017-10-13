@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Joomla webapp driver.
+ * Joomla webapp backup driver.
  *
  * @category   apps
  * @package    joomla
@@ -52,16 +52,16 @@ clearos_load_language('joomla');
 // D E P E N D E N C I E S
 ///////////////////////////////////////////////////////////////////////////////
 
-use \clearos\apps\webapp\Webapp_Engine as Webapp_Engine;
+use \clearos\apps\webapp\Webapp_Backup_Engine as Webapp_Backup_Engine;
 
-clearos_load_library('webapp/Webapp_Engine');
+clearos_load_library('webapp/Webapp_Backup_Engine');
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
 ///////////////////////////////////////////////////////////////////////////////
 
 /**
- * Joomla webapp driver.
+ * Joomla webapp backup driver.
  *
  * @category   apps
  * @package    joomla
@@ -72,7 +72,7 @@ clearos_load_library('webapp/Webapp_Engine');
  * @link       http://www.clearfoundation.com/docs/developer/apps/joomla/
  */
 
-class Webapp_Driver extends Webapp_Engine
+class Webapp_Backup_Driver extends Webapp_Backup_Engine
 {
     ///////////////////////////////////////////////////////////////////////////
     // C O N S T A N T S
@@ -85,7 +85,7 @@ class Webapp_Driver extends Webapp_Engine
     ///////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Joomla webapp constructor.
+     * Joomla webapp backup constructor.
      */
 
     public function __construct()
@@ -95,3 +95,5 @@ class Webapp_Driver extends Webapp_Engine
         parent::__construct(self::WEBAPP_BASENAME);
     }
 }
+
+// vim: syntax=php ts=4

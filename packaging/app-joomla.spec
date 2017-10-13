@@ -1,32 +1,41 @@
 
 Name: app-joomla
 Epoch: 1
-Version: 2.0.14
+Version: 1.0.0
 Release: 1%{dist}
 Summary: Joomla
 License: GPLv3
 Group: ClearOS/Apps
+Packager: Xtreem Solution
+Vendor: Xtreem Solution
 Source: %{name}-%{version}.tar.gz
 Buildarch: noarch
 Requires: %{name}-core = 1:%{version}-%{release}
 Requires: app-base
-Requires: app-webapp
-Requires: app-system-database
+Requires: app-web-server >= 1:2.4.0
+Requires: app-mariadb
+Requires: unzip
+Requires: zip
 
 %description
-Joomla is an award-winning content management system (CMS), which enables you to build web sites and powerful online applications.
+Joomla - a description goes here.
 
 %package core
 Summary: Joomla - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
-Requires: app-webapp-core >= 1:1.6.1
-Requires: app-system-database-core >= 1:1.6.1
-Requires: webapp-joomla
+Requires: mod_authnz_external
+Requires: mod_authz_unixgroup
+Requires: mod_ssl
+Requires: phpMyAdmin
+Requires: app-flexshare-core
+Requires: app-certificate-manager-core
+Requires: app-web-server-core >= 1:2.4.4
+Requires: app-webapp-core >= 1:2.4.0
 
 %description core
-Joomla is an award-winning content management system (CMS), which enables you to build web sites and powerful online applications.
+Joomla - a description goes here.
 
 This package provides the core API and libraries.
 
@@ -37,13 +46,12 @@ This package provides the core API and libraries.
 %install
 mkdir -p -m 755 %{buildroot}/usr/clearos/apps/joomla
 cp -r * %{buildroot}/usr/clearos/apps/joomla/
-rm -f %{buildroot}/usr/clearos/apps/joomla/README.md
-install -d -m 0755 %{buildroot}/var/clearos/joomla
-install -d -m 0755 %{buildroot}/var/clearos/joomla/archive
-install -d -m 0755 %{buildroot}/var/clearos/joomla/backup
-install -d -m 0755 %{buildroot}/var/clearos/joomla/webroot
-install -D -m 0644 packaging/webapp-joomla-flexshare.conf %{buildroot}/etc/clearos/flexshare.d/webapp-joomla.conf
-install -D -m 0644 packaging/webapp-joomla-httpd.conf %{buildroot}/etc/httpd/conf.d/webapp-joomla.conf
+
+install -d -m 0775 %{buildroot}/var/clearos/joomla
+install -d -m 0775 %{buildroot}/var/clearos/joomla/backup
+install -d -m 0775 %{buildroot}/var/clearos/joomla/sites
+install -d -m 0775 %{buildroot}/var/clearos/joomla/versions
+install -D -m 0644 packaging/app-joomla.conf %{buildroot}/etc/httpd/conf.d/app-joomla.conf
 
 %post
 logger -p local6.notice -t installer 'app-joomla - installing'
@@ -80,15 +88,14 @@ exit 0
 
 %files core
 %defattr(-,root,root)
-%doc README.md
 %exclude /usr/clearos/apps/joomla/packaging
+%exclude /usr/clearos/apps/joomla/unify.json
 %dir /usr/clearos/apps/joomla
-%dir /var/clearos/joomla
-%dir /var/clearos/joomla/archive
-%dir /var/clearos/joomla/backup
-%dir /var/clearos/joomla/webroot
+%dir %attr(0775,webconfig,webconfig) /var/clearos/joomla
+%dir %attr(0775,webconfig,webconfig) /var/clearos/joomla/backup
+%dir %attr(0775,webconfig,webconfig) /var/clearos/joomla/sites
+%dir %attr(0775,webconfig,webconfig) /var/clearos/joomla/versions
 /usr/clearos/apps/joomla/deploy
 /usr/clearos/apps/joomla/language
 /usr/clearos/apps/joomla/libraries
-%config(noreplace) /etc/clearos/flexshare.d/webapp-joomla.conf
-%config(noreplace) /etc/httpd/conf.d/webapp-joomla.conf
+/etc/httpd/conf.d/app-joomla.conf

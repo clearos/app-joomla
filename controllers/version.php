@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Joomla upload controller.
+ * Joomla version controller.
  *
  * @category   apps
  * @package    joomla
  * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2014 ClearFoundation
+ * @copyright  2017 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/joomla/
  */
@@ -23,32 +23,34 @@ require_once $bootstrap . '/bootstrap.php';
 // D E P E N D E N C I E S
 ///////////////////////////////////////////////////////////////////////////////
 
-require clearos_app_base('webapp') . '/controllers/webapp_upload.php';
+require clearos_app_base('webapp') . '/controllers/webapp_version.php';
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
 ///////////////////////////////////////////////////////////////////////////////
 
 /**
- * Joomla upload controller.
+ * Joomla version controller.
  *
  * @category   apps
  * @package    joomla
  * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2014 ClearFoundation
+ * @copyright  2017 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/joomla/
  */
 
-class Upload extends Webapp_Upload
+class Version extends Webapp_Version
 {
     /**
-     * Upload constructor.
+     * Joomla version constructor.
      */
 
     function __construct()
     {
-        parent::__construct('joomla');
+        $this->lang->load('joomla');
+
+        parent::__construct('joomla', lang('joomla_app_name'));
     }
 }
