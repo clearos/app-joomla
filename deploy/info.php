@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'joomla';
-$app['version'] = '1.0.0';
+$app['version'] = '1.0.1';
 $app['release'] = '1';
 $app['vendor'] = 'Xtreem Solution';
 $app['packager'] = 'Xtreem Solution';
@@ -53,7 +53,7 @@ $app['requires'] = array(
 );
 
 $app['core_directory_manifest'] = array(
-    '/var/clearos/joomla',
+    '/var/clearos/joomla/backup' => array(),
     '/var/clearos/joomla/backup' => array(
         'mode' => '0775',
         'owner' => 'webconfig',

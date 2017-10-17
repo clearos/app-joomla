@@ -1,7 +1,7 @@
 
 Name: app-joomla
 Epoch: 1
-Version: 1.0.0
+Version: 1.0.1
 Release: 1%{dist}
 Summary: Joomla
 License: GPLv3
@@ -12,8 +12,10 @@ Source: %{name}-%{version}.tar.gz
 Buildarch: noarch
 Requires: %{name}-core = 1:%{version}-%{release}
 Requires: app-base
-Requires: app-web-server >= 1:2.4.0
+Requires: app-certificate-manager
 Requires: app-mariadb
+Requires: app-php-engines
+Requires: app-web-server >= 1:2.4.0
 Requires: unzip
 Requires: zip
 
@@ -25,13 +27,11 @@ Summary: Joomla - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
-Requires: mod_authnz_external
-Requires: mod_authz_unixgroup
-Requires: mod_ssl
-Requires: phpMyAdmin
-Requires: app-flexshare-core
 Requires: app-certificate-manager-core
-Requires: app-web-server-core >= 1:2.4.4
+Requires: app-flexshare-core
+Requires: app-mariadb-core
+Requires: app-php-engines-core
+Requires: app-web-server-core >= 1:2.4.5
 Requires: app-webapp-core >= 1:2.4.0
 
 %description core
@@ -47,11 +47,8 @@ This package provides the core API and libraries.
 mkdir -p -m 755 %{buildroot}/usr/clearos/apps/joomla
 cp -r * %{buildroot}/usr/clearos/apps/joomla/
 
-install -d -m 0775 %{buildroot}/var/clearos/joomla
 install -d -m 0775 %{buildroot}/var/clearos/joomla/backup
-install -d -m 0775 %{buildroot}/var/clearos/joomla/sites
 install -d -m 0775 %{buildroot}/var/clearos/joomla/versions
-install -D -m 0644 packaging/app-joomla.conf %{buildroot}/etc/httpd/conf.d/app-joomla.conf
 
 %post
 logger -p local6.notice -t installer 'app-joomla - installing'
@@ -91,11 +88,8 @@ exit 0
 %exclude /usr/clearos/apps/joomla/packaging
 %exclude /usr/clearos/apps/joomla/unify.json
 %dir /usr/clearos/apps/joomla
-%dir %attr(0775,webconfig,webconfig) /var/clearos/joomla
 %dir %attr(0775,webconfig,webconfig) /var/clearos/joomla/backup
-%dir %attr(0775,webconfig,webconfig) /var/clearos/joomla/sites
 %dir %attr(0775,webconfig,webconfig) /var/clearos/joomla/versions
 /usr/clearos/apps/joomla/deploy
 /usr/clearos/apps/joomla/language
 /usr/clearos/apps/joomla/libraries
-/etc/httpd/conf.d/app-joomla.conf
