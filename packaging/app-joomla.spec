@@ -1,7 +1,7 @@
 
 Name: app-joomla
 Epoch: 1
-Version: 1.0.1
+Version: 1.0.2
 Release: 1%{dist}
 Summary: Joomla
 License: GPLv3
@@ -32,7 +32,7 @@ Requires: app-flexshare-core
 Requires: app-mariadb-core
 Requires: app-php-engines-core
 Requires: app-web-server-core >= 1:2.4.5
-Requires: app-webapp-core >= 1:2.4.0
+Requires: app-webapp >= 1:2.4.0
 
 %description core
 Joomla - a description goes here.

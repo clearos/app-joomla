@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'joomla';
-$app['version'] = '1.0.1';
+$app['version'] = '1.0.2';
 $app['release'] = '1';
 $app['vendor'] = 'Xtreem Solution';
 $app['packager'] = 'Xtreem Solution';
@@ -40,7 +40,7 @@ $app['core_requires'] = array(
     'app-mariadb-core',
     'app-php-engines-core',
     'app-web-server-core >= 1:2.4.5',
-    'app-webapp-core >= 1:2.4.0',
+    'app-webapp >= 1:2.4.0',
 );
 
 $app['requires'] = array(
